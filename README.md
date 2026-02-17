@@ -17,10 +17,14 @@ This program gives the user the option to choose their own prime value and primi
 
 This program is for educational purposes only and should not be used for securing sensitive information.
 
+Caeser Ciphers are simple to decrypt. This program is not relying on the security of a Caeser Cipher, but rather exists to demonstrate to the user how the Diffie-Hellman key exchange works.
+
 Ethical Considerations and Responsible Use-----------------------------------------
 While the difficulty of the discrete logarithm problem makes this key exchange very secure, it should be mentioned that it is always possible to decrypt. Please use with caution and note that when used in practice, it is best to use prime numbers that are at least 2048 bits in length to increase security.
 
 If the network running the exchange doesn't authenticate the parties involved, it is possible that this exchange could be vulnerable to man-in-the-middle attacks- where an attacker could intercept the key exchange and provide different public values to each party, causing all messages to be filtered to the attacker. Please always take caution when putting information publically online.
+
+Since this program runs locally on one device, this threat is not a concern, but modifications to the program could result in privacy vulnerabilities.
 
 
 
