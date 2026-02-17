@@ -1,3 +1,18 @@
+/**
+ * DiffieHellman.java
+ * 
+ * This program simulates a simple Diffie-Hellman key exchange for educational purposes only.
+ * The Diffie-Hellman key exchange (1976) is a method of securely exchanging cryptographic keys over a public channel by allowing two parties to generate a shared secret key 
+ * without ever transmitting it directly. In this simulation, two users will choose private keys and compute their public values based on a shared, public prime number and generator.
+ * The key exhange is secret because of the difficulty of the discrete logarithm problem.
+ * 
+ * This implementation uses a Caeser Cipher to encrypt and decrypt messages using the shared secret key as the shift value.
+ * All messages are shifted within the range of printable ASCII characters (32-126).
+ * 
+ * @author Rowan Runkle
+ * Date: 2/16/26
+ */
+
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +59,10 @@ public class DiffieHellman {
     }
 
 
+    /**
+     * This method simulates the first user in the Diffie-Hellman key exchange. 
+     * The user can choose to have a prime number and generator randomly selected from a predefined list or input their own values.
+     */
     private void user1() {
         // Choose prime number and generator to start
         System.out.println("Hello User 1! To begin, we must choose a prime number and generator to be announced publically over the network. Would you like to have a prime number and generator chosen for you? (yes/no)");
@@ -85,6 +104,11 @@ public class DiffieHellman {
 
     }
 
+    /**
+     * This method computes the public value (bigX) based on the formula: bigX = (generator^secretVal) mod primeNumber
+     * @param secretVal
+     * @return
+     */
     private BigInteger ComputeBigX(int secretVal)
     {
         BigInteger g = BigInteger.valueOf(generator);
@@ -95,6 +119,9 @@ public class DiffieHellman {
     }
 
 
+    /**
+     * This method simulates the second user in the Diffie-Hellman key exchange. The user will input a password, private key, and message to encrypt.
+     */
     private void user2()
     {   
         // Acquire a first time password
@@ -116,6 +143,10 @@ public class DiffieHellman {
 
     }
 
+    /**
+     * This method computes the shared secret key based on the formula: sharedSecret = (publicValue^secretVal) mod primeNumber
+     * @param secretVal
+     */
     private void ComputeSharedSecret(int secretVal)
     {
         BigInteger p = BigInteger.valueOf(primeNumber);
@@ -127,12 +158,22 @@ public class DiffieHellman {
 
     }
 
+    /**
+     * This method attempts to compute the shared secret key based on the formula: sharedSecret = (publicValue^secretVal) mod primeNumber
+     * @param privateKey
+     * @param base
+     * @return
+     */
     private BigInteger TryComputeSharedSecret(int privateKey, BigInteger base)
     {
         BigInteger p = BigInteger.valueOf(primeNumber);
         return base.modPow(BigInteger.valueOf(privateKey), p);
     }
 
+    /**
+     * This method allows the user to choose whether they want to encrypt a message or decrypt a message. 
+     * The user will be prompted to enter their private key to confirm their identity and then the appropriate action will be taken based on their response.
+     */
     private void EncyptOrDecrypt()
     {
         System.out.println("\nWould you like to decrypt a message or send an encrypted message? Please write either \"decrypt\" or \"encrypt\"");
@@ -217,6 +258,14 @@ public class DiffieHellman {
         }
     }
 
+    /**
+     * This method takes in an encrypted message, the shared secret key, and the user number to determine which message to decrypt. 
+     * It then shifts each character in the message back by the value of the shared secret key (modulo the ASCII range) to return the original message.
+     * @param message
+     * @param bigShift
+     * @param user
+     * @return
+     */
     private String DecryptMessage(String message, BigInteger bigShift, int user)
     {
         int shift = (bigShift.mod(BigInteger.valueOf(ASCII_RANGE))).intValue();
@@ -248,6 +297,13 @@ public class DiffieHellman {
         return result.toString();
     }
 
+    /**
+     * This method takes in a message, the shared secret key, and the user number to determine which message to encrypt.
+     * It then shifts each character in the message forward by the value of the shared secret key (modulo the ASCII range) to return the encrypted message.
+     * @param message
+     * @param bigShift
+     * @param user
+     */
     private void EncryptMessage(String message, BigInteger bigShift, int user)
     {
         int shift = (bigShift.mod(BigInteger.valueOf(ASCII_RANGE))).intValue();
@@ -282,6 +338,10 @@ public class DiffieHellman {
 
     }
 
+    /**
+     * This method prompts the user to enter their password to confirm their identity. If the password matches either user's password, 
+     * they will be logged in and taken to the encrypt/decrypt menu. If the password is incorrect, they will be prompted to try again.
+     */
     private void Login()
     {
         System.out.println("\nPlease enter password to confirm your identity: ");
