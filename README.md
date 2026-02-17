@@ -27,8 +27,9 @@ If the network running the exchange doesn't authenticate the parties involved, i
 Since this program runs locally on one device, this threat is not a concern, but modifications to the program could result in privacy vulnerabilities.
 
 
-
-
+AI Usage---------------------------------------------------------------
+This program used VSCode's built in copilot to assist in writing method header comments.
+No code was generated with AI, only method descriptor comments.
 
 
 
