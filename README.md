@@ -13,7 +13,7 @@ No background knowledge is required to run this program. The program prompts the
 
 Limitations---------------------------------------------------------------
 *NOTE*
-This program gives the user the option to choose their own prime value and primitive root, but it does not check the accuracy of the primitive root. If user's wish to use their own values instead of the ones provided by the program, they must ensure the correctness of the root on their own.
+This program gives the user the option to choose their own prime value and primitive root, but it does not check the accuracy of the primitive root or prime number. If user's wish to use their own values instead of the ones provided by the program, they must ensure the correctness of the root on their own, and the primality of the number they chose.
 
 This program is for educational purposes only and should not be used for securing sensitive information.
 
